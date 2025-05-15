@@ -1,0 +1,91 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- TFM used when coding in Visual Studio and when creating templates -->
+    <!-- All 'template.json' should provide a 'choice' for the default TFM -->
+    <DefaultTargetFramework Condition="'$(DefaultTargetFramework)' == ''">net9.0</DefaultTargetFramework>
+
+    <!-- TFMs used to build the abstractions and modules, by convention the default TFM is at the first position -->
+    <!-- In a cross-targeting build, some assets are only copied on the first TFM, by convention the default TFM -->
+    <CommonTargetFrameworks Condition="'$(CommonTargetFrameworks)' == ''">net8.0;net9.0</CommonTargetFrameworks>
+  </PropertyGroup>
+
+  <!-- Detect if the solution is opened in VS to limit the TFMs that are analyzed by Roslyn for performance reasons -->
+  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' == 'true' or '$(BuildingByReSharper)' == 'true'">
+    <CommonTargetFrameworks>$(DefaultTargetFramework)</CommonTargetFrameworks>
+  </PropertyGroup>
+
+  <!-- Default TFMs to use when building and packaging -->
+  <PropertyGroup>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Authors>Mike Alhayek</Authors>
+    <Company>CrestApps</Company>
+    <IsPackable>true</IsPackable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/CrestApps/CrestApps.OrchardCore</RepositoryUrl>
+    <CompanyUrl>https://crestapps.com</CompanyUrl>
+    <CrestAppsDescription>Jambonz client using csharp.</CrestAppsDescription>
+    <PackageTags>CrestApps OrchardCore</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- https://aka.ms/vs-build-acceleration -->
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Analysis rules">
+
+    <AnalysisLevel>latest-Recommended</AnalysisLevel>
+
+    <!-- Only treat analyzer warnings as errors -->
+    <WarningsAsErrors>$(WarningsAsErrors);CS*;CA*</WarningsAsErrors>
+
+    <!-- The behavior could vary based on the current user's locale setting -->
+    <NoWarn>$(NoWarn);CA1304;CA1305;CA1310</NoWarn>
+
+    <!-- Specify a culture or use an invariant version to avoid implicit dependency on current culture -->
+    <NoWarn>$(NoWarn);CA1311</NoWarn>
+
+    <!-- Do not declare static members on generic types -->
+    <NoWarn>$(NoWarn);CA1000</NoWarn>
+
+    <!-- For improved performance, use the LoggerMessage delegates -->
+    <NoWarn>$(NoWarn);CA1848</NoWarn>
+
+    <!-- Identifier contains type name -->
+    <NoWarn>$(NoWarn);CA1720</NoWarn>
+
+    <!-- Do not declare visible instance fields -->
+    <NoWarn>$(NoWarn);CA1051</NoWarn>
+
+    <!-- Avoid using cref tags with a prefix -->
+    <NoWarn>$(NoWarn);CA1200</NoWarn>
+
+    <!-- Rename type name X so that it does not end in 'Delegate', 'EventHandler', 'Permission' etc -->
+    <NoWarn>$(NoWarn);CA1711</NoWarn>
+
+    <!-- Parameter name differs from original overriden implemented name -->
+    <NoWarn>$(NoWarn);CA1725</NoWarn>
+
+    <!-- Reserved keyword -->
+    <NoWarn>$(NoWarn);CA1716</NoWarn>
+
+    <!-- Type owns disposable field(s) -->
+    <NoWarn>$(NoWarn);CA1001</NoWarn>
+
+    <!-- Exception type is not sufficiently specific -->
+    <NoWarn>$(NoWarn);CA2201</NoWarn>
+
+    <!-- CA1861: Prefer 'static readonly' fields over constant array arguments if the called method is called repeatedly and is not mutating the passed array -->
+    <NoWarn>$(NoWarn);CA1861</NoWarn>
+
+    <NoWarn>$(NoWarn),SA0001,CS1573,CS1591,CS1712</NoWarn>
+
+  </PropertyGroup>
+
+</Project>

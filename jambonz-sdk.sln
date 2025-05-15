@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jambonz.Client.Core", "src\Jambonz.Client.Core\Jambonz.Client.Core.csproj", "{BF6E9EF1-32E2-408A-9FFF-C3FBE307E7E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jambonz.Client.V1", "src\Jambonz.Client.V1\Jambonz.Client.V1.csproj", "{1B1F7410-2715-0EE3-BB8F-A93761308C96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF6E9EF1-32E2-408A-9FFF-C3FBE307E7E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6E9EF1-32E2-408A-9FFF-C3FBE307E7E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF6E9EF1-32E2-408A-9FFF-C3FBE307E7E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6E9EF1-32E2-408A-9FFF-C3FBE307E7E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B1F7410-2715-0EE3-BB8F-A93761308C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B1F7410-2715-0EE3-BB8F-A93761308C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B1F7410-2715-0EE3-BB8F-A93761308C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B1F7410-2715-0EE3-BB8F-A93761308C96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEC457E3-1EF1-42AF-826B-3D88D21B3C68}
+	EndGlobalSection
+EndGlobal
