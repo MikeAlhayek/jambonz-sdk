@@ -45,12 +45,16 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddJambonzV1Services(this ServiceCollection services)
     {
-        services.AddScoped<IApplicationsService, ApplicationsService>();
-        services.AddScoped<IUsersService, UsersService>();
-        services.AddScoped<IWebhooksService, WebhooksService>();
+        services.AddScoped<IApiKeysService, ApiKeysService>();
         services.AddScoped<IAccountsService, AccountsService>();
+        services.AddScoped<IApplicationsService, ApplicationsService>();
+        services.AddScoped<IAvailabilitiesService, AvailabilitiesService>();
         services.AddScoped<IClientsService, ClientsService>();
         services.AddScoped<IMicrosoftTeamsTenantsService, MicrosoftTeamsTenantsService>();
+        services.AddScoped<IUsersService, UsersService>();
+        services.AddScoped<ISbcsService, SbcsService>();
+        services.AddScoped<IVoipCarriersService, VoipCarriersService>();
+        services.AddScoped<IWebhooksService, WebhooksService>();
 
         return services;
     }

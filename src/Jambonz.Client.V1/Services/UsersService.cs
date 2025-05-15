@@ -24,7 +24,7 @@ public sealed class UsersService : ApiBaseService, IUsersService
         => UpdateRecordAsync(userId, data, cancellationToken);
 
     public Task<CurrentUser> GetCurrentAsync(CancellationToken cancellationToken = default)
-        => GetRecordAsync<CurrentUser>("me", cancellationToken);
+        => GetByUriAsync<CurrentUser>($"{UriPrefix}/me", cancellationToken);
 
     public Task<bool> DeleteAsync(string userId, CancellationToken cancellationToken = default)
         => DeleteRecordAsync(userId, cancellationToken);

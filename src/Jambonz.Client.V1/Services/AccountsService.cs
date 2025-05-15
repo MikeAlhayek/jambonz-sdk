@@ -1,7 +1,8 @@
-using System.Net.Http.Json;
 using Jambonz.Client.Core.Json;
 using Jambonz.Client.V1.Contracts;
+using Jambonz.Client.V1.Models;
 using Jambonz.Client.V1.Models.Accounts;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 
 namespace Jambonz.Client.V1.Services;
@@ -17,25 +18,10 @@ public sealed class AccountsService : ApiBaseService, IAccountsService
     {
     }
 
-    public async Task<AccountAvailabilitiesResult> GetAvailabilityAsync(string type, string value, CancellationToken cancellationToken = default)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(type);
-        ArgumentException.ThrowIfNullOrEmpty(value);
-
-        var client = GetClient();
-
-        var response = await client.GetAsync($"v1/Availability?type={type}&value={value}", cancellationToken);
-
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<AccountAvailabilitiesResult>(Options.JsonSerializerOptions, cancellationToken);
-    }
-
-    public async Task<AccountWebhookSigningResult> GetWebhookSigningAsync(string accountId, bool? regenerate = null, CancellationToken cancellationToken = default)
+    public Task<AccountWebhookSigningResult> GetWebhookSigningAsync(string accountId, bool? regenerate = null, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(accountId);
 
-        var client = GetClient();
         var uri = $"{UriPrefix}/{accountId}";
 
         if (regenerate.HasValue)
@@ -43,69 +29,29 @@ public sealed class AccountsService : ApiBaseService, IAccountsService
             uri += $"?regenerate={regenerate.Value.ToString().ToLowerInvariant()}";
         }
 
-        var response = await client.GetAsync(uri, cancellationToken);
-
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<AccountWebhookSigningResult>(Options.JsonSerializerOptions, cancellationToken);
+        return GetByUriAsync<AccountWebhookSigningResult>(uri, cancellationToken);
     }
 
-    public async Task<bool> CreateOrUpdateSimpRealmAsync(string accountId, string sipRealmId, CancellationToken cancellationToken = default)
+    public Task<bool> CreateOrUpdateSimpRealmAsync(string accountId, string sipRealmId, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(accountId);
         ArgumentException.ThrowIfNullOrEmpty(sipRealmId);
 
-        var client = GetClient();
-
-        var response = await client.PostAsync($"{UriPrefix}/{accountId}/SipRealms/{sipRealmId}", _emptyContent, cancellationToken);
-
-        return response.IsSuccessStatusCode;
+        return PostByUriAsync($"{UriPrefix}/{accountId}/SipRealms/{sipRealmId}", _emptyContent, cancellationToken);
     }
 
-    public async Task<AccountResult> CreateLimitAsync(string accountId, LimitCategory? category = null, CancellationToken cancellationToken = default)
+    public Task<AccountResult> CreateLimitAsync(string accountId, LimitCategory? category = null, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(accountId);
 
-        var client = GetClient();
-
-        var response = await client.PostAsJsonAsync($"{UriPrefix}/{accountId}/Limits", new CreateLimit() { Category = category, }, Options.JsonSerializerOptions, cancellationToken);
-
-        return await response.Content.ReadFromJsonAsync<AccountResult>(Options.JsonSerializerOptions, cancellationToken);
+        return PostByUriAsync<CreateLimit, AccountResult>($"{UriPrefix}/{accountId}/Limits", new() { Category = category, }, cancellationToken);
     }
 
-    public async Task<AccountLimitResult[]> GetLimitsAsync(string accountId, CancellationToken cancellationToken = default)
+    public Task<AccountLimitResult[]> GetLimitsAsync(string accountId, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(accountId);
 
-        var client = GetClient();
-
-        var response = await client.GetAsync($"{UriPrefix}/{accountId}/Limits", cancellationToken);
-
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<AccountLimitResult[]>(Options.JsonSerializerOptions, cancellationToken);
-    }
-
-    public async Task<AccountApiKey[]> GetApiKeys(CancellationToken cancellationToken = default)
-    {
-        var client = GetClient();
-
-        var response = await client.GetAsync("v1/ApiKeys", cancellationToken);
-
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<AccountApiKey[]>(Options.JsonSerializerOptions, cancellationToken);
-    }
-
-    public async Task<CreatedApiKey> CreateApiKeys(string accountId, CancellationToken cancellationToken = default)
-    {
-        var client = GetClient();
-
-        var response = await client.PostAsJsonAsync("v1/ApiKeys", new CreateApiKey() { AccountSid = accountId, }, Options.JsonSerializerOptions, cancellationToken);
-
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<CreatedApiKey>(Options.JsonSerializerOptions, cancellationToken);
+        return GetByUriAsync<AccountLimitResult[]>($"{UriPrefix}/{accountId}/Limits", cancellationToken);
     }
 
     public Task<Account[]> GetAsync(CancellationToken cancellationToken = default)
@@ -122,4 +68,94 @@ public sealed class AccountsService : ApiBaseService, IAccountsService
 
     public Task<bool> DeleteAsync(string accountId, CancellationToken cancellationToken = default)
         => DeleteRecordAsync(accountId, cancellationToken);
+
+    public Task<PagedResult<CallLogEntry>> GetRecentCallsAsync(string accountId, CallLogQueryContext context, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(accountId);
+        ArgumentNullException.ThrowIfNull(context);
+
+        var queryParameters = new Dictionary<string, string>
+        {
+            { "page", ParameterToString(context.Page) },
+            { "count", ParameterToString(context.Count) },
+            { "days", ParameterToString(context.Days) },
+        };
+
+        if (context.Start.HasValue)
+        {
+            queryParameters.Add("start", ParameterToString(context.Start.Value));
+        }
+
+        if (context.End.HasValue)
+        {
+            queryParameters.Add("end", ParameterToString(context.End.Value));
+        }
+
+        if (context.Answered.HasValue)
+        {
+            queryParameters.Add("end", ParameterToString(context.End.Value));
+        }
+
+        if (context.Direction.HasValue)
+        {
+            queryParameters.Add("direction", ParameterToString(context.Direction.Value));
+        }
+
+        if (!string.IsNullOrEmpty(context.Filter))
+        {
+            queryParameters.Add("filter", ParameterToString(context.Filter));
+        }
+
+        var uri = QueryHelpers.AddQueryString($"{UriPrefix}/{accountId}/RecentCalls", queryParameters);
+
+        return GetByUriAsync<PagedResult<CallLogEntry>>(uri, cancellationToken);
+    }
+
+    public Task<CallTrace> GetCallTraceAsync(string accountId, string callId, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(accountId);
+        ArgumentException.ThrowIfNullOrEmpty(callId);
+
+        return GetByUriAsync<CallTrace>($"{UriPrefix}/{accountId}/RecentCalls/trace/{callId}", cancellationToken);
+    }
+
+    public Task<CallTrace> GetCallPcapAsync(string accountId, string callId, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(accountId);
+        ArgumentException.ThrowIfNullOrEmpty(callId);
+
+        return GetByUriAsync<CallTrace>($"{UriPrefix}/{accountId}/RecentCalls/{callId}/pcap", cancellationToken);
+    }
+
+    public Task<PagedResult<AlertQueryContext>> GetAlertsAsync(string accountId, AlertQueryContext context, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(accountId);
+        ArgumentNullException.ThrowIfNull(context);
+
+        var queryParameters = new Dictionary<string, string>
+        {
+            { "page", ParameterToString(context.Page) },
+            { "count", ParameterToString(context.Count) },
+            { "days", ParameterToString(context.Days) },
+        };
+
+        if (context.Start.HasValue)
+        {
+            queryParameters.Add("start", ParameterToString(context.Start.Value));
+        }
+
+        if (context.End.HasValue)
+        {
+            queryParameters.Add("end", ParameterToString(context.End.Value));
+        }
+
+        if (context.AlertType.HasValue)
+        {
+            queryParameters.Add("alert_type", ParameterToString(context.AlertType.Value));
+        }
+
+        var uri = QueryHelpers.AddQueryString($"{UriPrefix}/{accountId}/Alerts", queryParameters);
+
+        return GetByUriAsync<PagedResult<AlertQueryContext>>(uri, cancellationToken);
+    }
 }

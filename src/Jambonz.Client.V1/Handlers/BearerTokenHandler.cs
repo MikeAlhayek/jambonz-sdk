@@ -36,7 +36,7 @@ public sealed class BearerTokenHandler : DelegatingHandler
         {
             throw new UnauthorizedAccessException("Refresh access token failed. User re-authentication may be required.");
         }
-        else if ((int)response.StatusCode >= 400)
+        else if ((int)response.StatusCode >= 400 && _logger.IsEnabled(LogLevel.Error))
         {
             var body = await response.Content.ReadAsStringAsync(cancellationToken);
 
