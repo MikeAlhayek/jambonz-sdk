@@ -14,18 +14,23 @@ public sealed class ApplicationsService : ApiBaseService, IApplicationsService
     {
     }
 
+    /// <inheritdoc/>
     public Task<Application> GetAsync(string applicationId, CancellationToken cancellationToken = default)
         => GetRecordAsync<Application>(applicationId, cancellationToken);
 
-    public Task<Application[]> GetAsync(CancellationToken cancellationToken = default)
+    /// <inheritdoc/>
+    public Task<Application[]> ListAsync(CancellationToken cancellationToken = default)
         => GetRecordsAsync<Application[]>(cancellationToken);
 
+    /// <inheritdoc/>
     public Task<bool> CreateAsync(CreateApplication data, CancellationToken cancellationToken = default)
         => CreateRecordAsync(data, cancellationToken);
 
+    /// <inheritdoc/>
     public Task UpdateAsync(string userId, UpdateApplication data, CancellationToken cancellationToken = default)
         => UpdateRecordAsync(userId, data, cancellationToken);
 
+    /// <inheritdoc/>
     public Task<bool> DeleteAsync(string userId, CancellationToken cancellationToken = default)
         => DeleteRecordAsync(userId, cancellationToken);
 }

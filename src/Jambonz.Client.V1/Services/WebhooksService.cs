@@ -14,6 +14,7 @@ public sealed class WebhooksService : ApiBaseService, IWebhooksService
     {
     }
 
+    /// <inheritdoc/>
     public Task<Webhook> GetAsync(string webhookId, CancellationToken cancellationToken = default)
         => GetRecordAsync<Webhook>(webhookId, cancellationToken);
 }

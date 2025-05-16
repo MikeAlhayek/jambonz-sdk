@@ -14,18 +14,23 @@ public sealed class UsersService : ApiBaseService, IUsersService
     {
     }
 
+    /// <inheritdoc/>
     public Task<User> GetAsync(string userId, CancellationToken cancellationToken = default)
-        => GetAsync(userId, cancellationToken);
+        => GetRecordAsync<User>(userId, cancellationToken);
 
+    /// <inheritdoc/>
     public Task<bool> CreateAsync(CreateUser data, CancellationToken cancellationToken = default)
         => CreateRecordAsync(data, cancellationToken);
 
+    /// <inheritdoc/>
     public Task UpdateAsync(string userId, UpdateUser data, CancellationToken cancellationToken = default)
         => UpdateRecordAsync(userId, data, cancellationToken);
 
-    public Task<CurrentUser> GetCurrentAsync(CancellationToken cancellationToken = default)
-        => GetByUriAsync<CurrentUser>($"{UriPrefix}/me", cancellationToken);
-
+    /// <inheritdoc/>
     public Task<bool> DeleteAsync(string userId, CancellationToken cancellationToken = default)
         => DeleteRecordAsync(userId, cancellationToken);
+
+    /// <inheritdoc/>
+    public Task<CurrentUser> GetCurrentAsync(CancellationToken cancellationToken = default)
+        => GetByUriAsync<CurrentUser>($"{UriPrefix}/me", cancellationToken);
 }

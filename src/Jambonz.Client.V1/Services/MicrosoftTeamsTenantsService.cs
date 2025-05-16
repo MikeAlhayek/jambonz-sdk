@@ -14,18 +14,23 @@ public sealed class MicrosoftTeamsTenantsService : ApiBaseService, IMicrosoftTea
     {
     }
 
+    /// <inheritdoc/>
     public Task<MicrosoftTeamTenant> GetTenantAsync(string tenantId, CancellationToken cancellationToken = default)
         => GetRecordAsync<MicrosoftTeamTenant>(tenantId, cancellationToken);
 
-    public Task<MicrosoftTeamTenant[]> GetTenantsAsync(CancellationToken cancellationToken = default)
+    /// <inheritdoc/>
+    public Task<MicrosoftTeamTenant[]> ListTenantsAsync(CancellationToken cancellationToken = default)
         => GetRecordsAsync<MicrosoftTeamTenant[]>(cancellationToken);
 
+    /// <inheritdoc/>
     public Task<CreatedMicrosoftTeamTenant> CreateAsync(CreateMicrosoftTeamTenant data, CancellationToken cancellationToken = default)
         => CreateRecordAsync<CreateMicrosoftTeamTenant, CreatedMicrosoftTeamTenant>(data, cancellationToken);
 
+    /// <inheritdoc/>
     public Task<bool> UpdateAsync(string tenantId, CreateMicrosoftTeamTenant data, CancellationToken cancellationToken = default)
         => UpdateRecordAsync(tenantId, data, cancellationToken);
 
+    /// <inheritdoc/>
     public Task<bool> DeleteAsync(string tenantId, CancellationToken cancellationToken = default)
         => DeleteRecordAsync(tenantId, cancellationToken);
 }

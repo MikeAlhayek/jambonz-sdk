@@ -14,13 +14,8 @@ public sealed class SbcsService : ApiBaseService, ISbcsService
     {
     }
 
-    /// <summary>
-    /// Retrieve public IP addresses of the jambonz SBCs
-    /// </summary>
-    /// <param name="providerId">allows null</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public Task<IpAddressInfo[]> GetPublicIpAddresses(string providerId, CancellationToken cancellationToken = default)
+    /// <inheritdoc/>
+    public Task<IpAddressInfo[]> ListPublicIpAddresses(string providerId, CancellationToken cancellationToken = default)
     {
         var uri = UriPrefix;
 

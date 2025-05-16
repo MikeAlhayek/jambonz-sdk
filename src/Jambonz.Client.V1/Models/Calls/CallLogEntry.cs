@@ -1,4 +1,4 @@
-namespace Jambonz.Client.V1;
+namespace Jambonz.Client.V1.Models.Calls;
 
 /// <summary>
 /// Represents a single call log entry with metadata and call status.

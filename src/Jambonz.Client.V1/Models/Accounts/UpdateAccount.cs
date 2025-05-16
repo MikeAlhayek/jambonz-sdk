@@ -28,5 +28,5 @@ public sealed class UpdateAccount
     /// <summary>
     /// The webhook configuration used for SIP registration authentication. This field is optional.
     /// </summary>
-    public RegistrationHook RegistrationHook { get; set; }
+    public Webhook RegistrationHook { get; set; }
 }

@@ -1,4 +1,4 @@
-namespace Jambonz.Client.V1.Models;
+namespace Jambonz.Client.V1.Models.Alerts;
 
 /// <summary>
 /// Represents the query parameters used to retrieve alerts with pagination and filtering options.

@@ -14,6 +14,7 @@ public sealed class AvailabilitiesService : ApiBaseService, IAvailabilitiesServi
     {
     }
 
+    /// <inheritdoc/>
     public Task<AccountAvailabilitiesResult> GetAvailabilityAsync(string type, string value, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(type);

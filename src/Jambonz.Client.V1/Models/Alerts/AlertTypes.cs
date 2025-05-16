@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Jambonz.Client.V1.Models;
+namespace Jambonz.Client.V1.Models.Alerts;
 
 public enum AlertTypes
 {

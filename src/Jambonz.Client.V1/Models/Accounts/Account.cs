@@ -28,7 +28,7 @@ public sealed class Account
     /// <summary>
     /// The webhook configuration for registration events. Optional.
     /// </summary>
-    public RegistrationHook RegistrationHook { get; set; }
+    public Webhook RegistrationHook { get; set; }
 
     /// <summary>
     /// The unique identifier (UUID) of the application used for device-initiated calls. Optional.

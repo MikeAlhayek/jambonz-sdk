@@ -1,4 +1,4 @@
-namespace Jambonz.Client.V1.Models;
+namespace Jambonz.Client.V1.Models.Alerts;
 
 /// <summary>
 /// Represents a single alert entry with associated metadata.

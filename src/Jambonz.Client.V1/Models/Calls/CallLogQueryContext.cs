@@ -1,6 +1,4 @@
-using System.Runtime.Serialization;
-
-namespace Jambonz.Client.V1;
+namespace Jambonz.Client.V1.Models.Calls;
 
 /// <summary>
 /// Represents the query parameters for retrieving call logs with filters and pagination.
@@ -47,13 +45,4 @@ public sealed class CallLogQueryContext
     /// Generic filter for caller ID, callee ID, or Call SID. Optional.
     /// </summary>
     public string Filter { get; set; }
-}
-
-public enum CallDirection
-{
-    [EnumMember(Value = "inbound")]
-    Inbound,
-
-    [EnumMember(Value = "outbound")]
-    Outbound,
 }

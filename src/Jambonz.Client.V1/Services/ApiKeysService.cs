@@ -14,9 +14,11 @@ public sealed class ApiKeysService : ApiBaseService, IApiKeysService
     {
     }
 
-    public Task<AccountApiKey[]> GetApiKeys(CancellationToken cancellationToken = default)
+    /// <inheritdoc/>
+    public Task<AccountApiKey[]> ListApiKeys(CancellationToken cancellationToken = default)
         => GetRecordsAsync<AccountApiKey[]>(cancellationToken);
 
+    /// <inheritdoc/>
     public Task<CreatedApiKey> CreateApiKeys(string accountId, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(accountId);
