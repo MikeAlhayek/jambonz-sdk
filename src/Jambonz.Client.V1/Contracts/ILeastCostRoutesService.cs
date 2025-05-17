@@ -1,5 +1,5 @@
-using Jambonz.Client.V1.Models.CallRouting;
 using Jambonz.Client.V1.Models.LeastCostRoutes;
+using Jambonz.Client.V1.Models.LeastCostRoutings;
 
 namespace Jambonz.Client.V1.Contracts;
 

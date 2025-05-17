@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="..\Jambonz.Client.Core\Jambonz.Client.Core.csproj" />
+    <ProjectReference Include="..\Jambonz.Client.V1\Jambonz.Client.V1.csproj" />
+    <ProjectReference Include="..\Jambonz.Http\Jambonz.Http.csproj" />
+  </ItemGroup>
+</Project>

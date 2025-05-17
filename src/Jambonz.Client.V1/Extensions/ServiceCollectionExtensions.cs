@@ -4,6 +4,7 @@ using Jambonz.Client.Core.Json;
 using Jambonz.Client.V1.Contracts;
 using Jambonz.Client.V1.Handlers;
 using Jambonz.Client.V1.Models;
+using Jambonz.Client.V1.Notifications;
 using Jambonz.Client.V1.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -30,6 +31,10 @@ public static class ServiceCollectionExtensions
         services
             .AddTransient<IConfigureOptions<JambonzOptions>, JambonzOptionsConfiguration>()
             .AddOptions<JambonzOptions>();
+
+        services.AddKeyedSingleton<IJambonzSessionManager, CallSessionManager>("call");
+        services.AddKeyedSingleton<IJambonzSessionManager, LargeLanguageModelSessionManager>("tts");
+        services.AddKeyedSingleton<IJambonzSessionManager, LargeLanguageModelSessionManager>("llm");
 
         services
             .AddScoped<BearerTokenHandler>()

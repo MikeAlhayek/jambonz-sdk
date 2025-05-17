@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jambonz.Client.Core", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jambonz.Client.V1", "src\Jambonz.Client.V1\Jambonz.Client.V1.csproj", "{1B1F7410-2715-0EE3-BB8F-A93761308C96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jambonz.AspNetCore", "src\Jambonz.AspNetCore\Jambonz.AspNetCore.csproj", "{90DEFCA1-67EA-25B3-A8D5-ADEAF9301F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jambonz.Http", "src\Jambonz.Http\Jambonz.Http.csproj", "{7C623C77-D726-48AD-8BF1-A8A34E4D4A6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{1B1F7410-2715-0EE3-BB8F-A93761308C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B1F7410-2715-0EE3-BB8F-A93761308C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B1F7410-2715-0EE3-BB8F-A93761308C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90DEFCA1-67EA-25B3-A8D5-ADEAF9301F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90DEFCA1-67EA-25B3-A8D5-ADEAF9301F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90DEFCA1-67EA-25B3-A8D5-ADEAF9301F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90DEFCA1-67EA-25B3-A8D5-ADEAF9301F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C623C77-D726-48AD-8BF1-A8A34E4D4A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C623C77-D726-48AD-8BF1-A8A34E4D4A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C623C77-D726-48AD-8BF1-A8A34E4D4A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C623C77-D726-48AD-8BF1-A8A34E4D4A6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

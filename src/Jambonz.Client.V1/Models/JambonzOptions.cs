@@ -6,5 +6,7 @@ public sealed class JambonzOptions
 
     public string AccountSid { get; set; }
 
+    public string WebhookSecret { get; set; }
+
     public Uri Host { get; set; }
 }

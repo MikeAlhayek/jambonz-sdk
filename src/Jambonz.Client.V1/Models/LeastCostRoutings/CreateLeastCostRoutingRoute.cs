@@ -1,4 +1,4 @@
-namespace Jambonz.Client.V1.Models.CallRouting;
+namespace Jambonz.Client.V1.Models.LeastCostRoutings;
 
 /// <summary>
 /// Represents a Least Cost Route configuration used to route outbound calls based on regex and priority.

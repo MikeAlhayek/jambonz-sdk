@@ -1,4 +1,4 @@
-namespace Jambonz.Client.V1.Models.CallRouting;
+namespace Jambonz.Client.V1.Models.LeastCostRoutings;
 
 /// <summary>
 /// Represents a carrier set entry within a Least Cost Route configuration.

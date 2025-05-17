@@ -1,4 +1,4 @@
-namespace Jambonz.Client.V1.Models.CallRouting;
+namespace Jambonz.Client.V1.Models.LeastCostRoutings;
 
 /// <summary>
 /// Represents a service provider's Least Cost Routing (LCR) configuration.

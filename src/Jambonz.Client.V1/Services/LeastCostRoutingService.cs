@@ -1,6 +1,6 @@
 using Jambonz.Client.Core.Json;
 using Jambonz.Client.V1.Contracts;
-using Jambonz.Client.V1.Models.CallRouting;
+using Jambonz.Client.V1.Models.LeastCostRoutings;
 using Microsoft.Extensions.Options;
 
 namespace Jambonz.Client.V1.Services;

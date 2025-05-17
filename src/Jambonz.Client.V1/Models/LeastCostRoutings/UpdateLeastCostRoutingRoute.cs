@@ -1,4 +1,4 @@
-namespace Jambonz.Client.V1.Models.CallRouting;
+namespace Jambonz.Client.V1.Models.LeastCostRoutings;
 
 /// <summary>
 /// Represents a request to update a Least Cost Route configuration.
